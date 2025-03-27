@@ -44,10 +44,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  buttonActive: {
+    backgroundColor: '#3b82f6',
+  },
+
   buttonText: {
     color: '#3b82f6',
     fontSize: 15,
     fontWeight: 'bold',
+  },
+
+  buttonTextActive: {
+    color: '#fff',
   },
 
   chatbox: {

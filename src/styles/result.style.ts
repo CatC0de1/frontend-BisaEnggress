@@ -64,22 +64,24 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 20,
+    marginTop: 40,
   },
 
   button: {
-    borderWidth: 2,
-    borderColor: '#3b82f6',
+    // borderWidth: 2,
+    // borderColor: '#3b82f6',
+    backgroundColor: '#3b82f6',
     borderRadius: 8,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 5,
     width: '45%',
     alignItems: 'center',
   },
 
   buttonText: {
-    color: '#3b82f6',
-    fontSize: 13,
+    // color: '#3b82f6',
+    color: '#fff',
+    fontSize: 15,
     fontWeight: '600',
   },
 

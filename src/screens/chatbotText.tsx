@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {View, Text, TextInput, TouchableOpacity, ScrollView, Modal} from 'react-native';
+import {View, Text, TextInput, TouchableWithoutFeedback, ScrollView, Modal, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App'; // Import the ParamList type
@@ -10,6 +10,8 @@ const ChatbotTextScreen: React.FC = () => {
   const [messages, setMessages] = useState<{text: string; sender: 'user' | 'bot'}[]>([]);
   const [input, setInput] = useState<string>('');
   const [canSend, setCanSend] = useState<boolean>(true); // State to control message alternation
+  const [isPressed1, setIsPressed1] = useState<boolean>(false);
+  const [isPressed2, setIsPressed2] = useState<boolean>(false);
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const scrollViewRef = useRef<ScrollView>(null); // Reference to the ScrollView
 
@@ -35,12 +37,28 @@ const ChatbotTextScreen: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.header}>Bisa Enggress</Text>
       <View style={styles.actionButtons}>
-        <TouchableOpacity style={styles.button} onPress={() => setModalVisible('kembali')}>
-          <Text style={styles.buttonText}>Kembali</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => setModalVisible('nilai')}>
-          <Text style={styles.buttonText}>Nilai</Text>
-        </TouchableOpacity>
+        <TouchableWithoutFeedback
+          onPressIn={() => setIsPressed1(true)}
+          onPressOut={() => setIsPressed1(false)}
+          onPress={() => setModalVisible('kembali')}
+        >
+          <View style={[styles.button, isPressed1 && styles.buttonActive]}>
+            <Text style={[styles.buttonText, isPressed1 && styles.buttonTextActive]}>
+              Kembali
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          onPressIn={() => setIsPressed2(true)}
+          onPressOut={() => setIsPressed2(false)}
+          onPress={() => setModalVisible('nilai')}
+        >
+          <View style={[styles.button, isPressed2 && styles.buttonActive]}>
+            <Text style={[styles.buttonText, isPressed2 && styles.buttonTextActive]}>
+              Nilai
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
       <ScrollView
         style={styles.chatbox}
@@ -58,6 +76,7 @@ const ChatbotTextScreen: React.FC = () => {
         <TextInput
           style={styles.input}
           placeholder="Tulis pesan..."
+          placeholderTextColor={'#999'}
           value={input}
           onChangeText={setInput}
           editable={canSend} // Disable input when waiting for bot response
