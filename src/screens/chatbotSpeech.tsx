@@ -14,6 +14,9 @@ const ChatbotSpeechScreen: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [icon2Index, seticon2Index] = useState(0);
   const [icon3Index, setIcon3Index] = useState(0);
+  const [isHolding, setIsHolding] = useState(false); // State to track button hold
+  const blinkAnim = useRef(new Animated.Value(0)).current; // Animation value
+
   const icons2 = ['volume', 'volume-1', 'volume-2'];
   const icons3 = ['dot-single', 'dots-two-horizontal', 'dots-three-horizontal'];
 
@@ -30,6 +33,30 @@ const ChatbotSpeechScreen: React.FC = () => {
     }, 750); // Change Icon3 every 750ms
     return () => clearInterval(interval);
   }, [icons3.length]);
+
+  const startBlinking = () => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(blinkAnim, {
+          toValue: 1,
+          duration: 750,
+          easing: Easing.linear,
+          useNativeDriver: false,
+        }),
+        Animated.timing(blinkAnim, {
+          toValue: 0,
+          duration: 750,
+          easing: Easing.linear,
+          useNativeDriver: false,
+        }),
+      ])
+    ).start();
+  };
+
+  const stopBlinking = () => {
+    blinkAnim.stopAnimation();
+    blinkAnim.setValue(0); // Reset animation
+  };
 
   return (
     <View style={styles.container}>
@@ -80,13 +107,33 @@ const ChatbotSpeechScreen: React.FC = () => {
       </View> */}
 
       {/* record */}
-      <TouchableOpacity
-        style={styles.speechButton}
-        activeOpacity={0.6}
+      <Animated.View
+        style={[
+          styles.speechButton,
+          isHolding && {
+            backgroundColor: blinkAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: ['rgba(0, 120, 212, 1)', 'rgba(0, 120, 212, 0.6)'], // Blinking colors for the button
+            }),
+          },
+        ]}
       >
-        <Icon name="microphone" size={75} color="#fff" />
-        <Text style={styles.speechButtonText}>Tahan untuk bicara</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.centerMic}
+          activeOpacity={0.6}
+          onPressIn={() => {
+            setIsHolding(true);
+            startBlinking();
+          }}
+          onPressOut={() => {
+            setIsHolding(false);
+            stopBlinking();
+          }}
+        >
+          <Icon name="microphone" size={75} color="#fff" />
+          <Text style={styles.speechButtonText}>Tahan untuk bicara</Text>
+        </TouchableOpacity>
+      </Animated.View>
 
 
       {/* Modal */}

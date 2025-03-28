@@ -112,6 +112,11 @@ const styles = StyleSheet.create({
     elevation: 5, // Shadow for Android
   },
 
+  centerMic: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
