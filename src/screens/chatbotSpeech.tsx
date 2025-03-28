@@ -80,12 +80,13 @@ const ChatbotSpeechScreen: React.FC = () => {
       </View> */}
 
       {/* record */}
-      <Pressable
+      <TouchableOpacity
         style={styles.speechButton}
+        activeOpacity={0.6}
       >
         <Icon name="microphone" size={75} color="#fff" />
         <Text style={styles.speechButtonText}>Tahan untuk bicara</Text>
-      </Pressable>
+      </TouchableOpacity>
 
 
       {/* Modal */}
