@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, Pressable, Modal} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {View, Text, TouchableOpacity, Pressable, Modal, Animated, Easing} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome icons
+import Icon2 from 'react-native-vector-icons/Feather';
+import Icon3 from 'react-native-vector-icons/Entypo';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App'; // Import the ParamList type
@@ -10,12 +12,30 @@ const ChatbotSpeechScreen: React.FC = () => {
 
   const [modalVisible, setModalVisible] = useState<'kembali' | 'nilai' | null>(null);
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [icon2Index, seticon2Index] = useState(0);
+  const [icon3Index, setIcon3Index] = useState(0);
+  const icons2 = ['volume', 'volume-1', 'volume-2'];
+  const icons3 = ['dot-single', 'dots-two-horizontal', 'dots-three-horizontal'];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      seticon2Index((prevIndex) => (prevIndex + 1) % icons2.length);
+    }, 750); // Change Icon2 every 750ms
+    return () => clearInterval(interval);
+  }, [icons2.length]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIcon3Index((prevIndex) => (prevIndex + 1) % icons3.length);
+    }, 750); // Change Icon3 every 750ms
+    return () => clearInterval(interval);
+  }, [icons3.length]);
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Bisa Enggress</Text>
       <View style={styles.actionButtons}>
-      <Pressable
+        <Pressable
           onPress={() => setModalVisible('kembali')} // Fix: Correct modal type
           style={({ pressed }) => [
             styles.button,
@@ -48,10 +68,25 @@ const ChatbotSpeechScreen: React.FC = () => {
           )}
         </Pressable>
       </View>
-      <TouchableOpacity style={styles.speechButton}>
-        <Icon name="microphone" size={50} color="#fff" />
+
+      {/* bot */}
+      {/* <View style={styles.botSpeech}>
+        <Icon2 name={icons2[icon2Index]} size={90} color="#fff" />
+      </View> */}
+
+      {/* waiting */}
+      {/* <View style={styles.progressSpeech}>
+        <Icon3 name={icons3[icon3Index]} size={50} color="#fff" />
+      </View> */}
+
+      {/* record */}
+      <Pressable
+        style={styles.speechButton}
+      >
+        <Icon name="microphone" size={75} color="#fff" />
         <Text style={styles.speechButtonText}>Tahan untuk bicara</Text>
-      </TouchableOpacity>
+      </Pressable>
+
 
       {/* Modal */}
       <Modal visible={modalVisible === 'kembali'} transparent animationType="fade">

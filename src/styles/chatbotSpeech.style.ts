@@ -62,10 +62,33 @@ const styles = StyleSheet.create({
   },
 
   speechButton: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
+    width: 225,
+    height: 225,
+    borderRadius: 200,
     backgroundColor: '#0078d4',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5, // Shadow for Android
+    position: 'relative', // Ensure proper positioning
+  },
+
+  speechButtonText: {
+    marginTop: 5,
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
+  botSpeech: {
+    width: 225,
+    height: 225,
+    borderRadius: 200,
+    backgroundColor: '#3b82f6',
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
@@ -75,18 +98,18 @@ const styles = StyleSheet.create({
     elevation: 5, // Shadow for Android
   },
 
-  speechButtonText: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-
-  speechResult: {
-    marginTop: 20,
-    fontSize: 18,
-    textAlign: 'center',
-    color: '#333',
+  progressSpeech: {
+    width: 225,
+    height: 225,
+    borderRadius: 200,
+    backgroundColor: 'rgba(59, 130, 246, 0.6)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5, // Shadow for Android
   },
 
   modalContainer: {

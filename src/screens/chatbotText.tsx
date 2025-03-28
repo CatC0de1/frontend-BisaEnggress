@@ -35,7 +35,7 @@ const ChatbotTextScreen: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.header}>Bisa Enggress</Text>
       <View style={styles.actionButtons}>
-      <Pressable
+        <Pressable
           onPress={() => setModalVisible('kembali')} // Fix: Correct modal type
           style={({ pressed }) => [
             styles.button,
