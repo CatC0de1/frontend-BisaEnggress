@@ -30,7 +30,7 @@ const HomeScreen: React.FC = () => {
         <Text style={styles.contentText}>jangan katakan</Text>
         <Text style={styles.meme}>'Ga Bisa Enggress'</Text>
       </View>
-      <TouchableOpacity style={styles.button} onPress={() => setModalVisible(true)}>
+      <TouchableOpacity style={styles.button} activeOpacity={0.6} onPress={() => setModalVisible(true)}>
         <Text style={styles.buttonText}>Mulai</Text>
       </TouchableOpacity>
 
@@ -59,10 +59,10 @@ const HomeScreen: React.FC = () => {
             </View>
 
             <View style={styles.actionButtons}>
-              <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
+              <TouchableOpacity style={styles.closeButton} activeOpacity={0.6} onPress={() => setModalVisible(false)}>
                 <Text style={styles.buttonText2}>Kembali</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.nextButton} onPress={navigateToChatbot}>
+              <TouchableOpacity style={styles.nextButton} activeOpacity={0.6} onPress={navigateToChatbot}>
                 <Text style={styles.buttonText2}>Mulai!</Text>
               </TouchableOpacity>
             </View>

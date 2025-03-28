@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {View, Text, TextInput, TouchableWithoutFeedback, ScrollView, Modal, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, Pressable, ScrollView, Modal, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App'; // Import the ParamList type
@@ -10,8 +10,6 @@ const ChatbotTextScreen: React.FC = () => {
   const [messages, setMessages] = useState<{text: string; sender: 'user' | 'bot'}[]>([]);
   const [input, setInput] = useState<string>('');
   const [canSend, setCanSend] = useState<boolean>(true); // State to control message alternation
-  const [isPressed1, setIsPressed1] = useState<boolean>(false);
-  const [isPressed2, setIsPressed2] = useState<boolean>(false);
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const scrollViewRef = useRef<ScrollView>(null); // Reference to the ScrollView
 
@@ -26,7 +24,7 @@ const ChatbotTextScreen: React.FC = () => {
       setTimeout(() => {
         setMessages(prevMessages => [
           ...prevMessages,
-          {text: 'Ini adalah balasan dari bot.', sender: 'bot'},
+          {text: 'Ini balasan dari chatbot.', sender: 'bot'},
         ]);
         setCanSend(true); // Re-enable sending after bot responds
       }, 1000);
@@ -37,28 +35,38 @@ const ChatbotTextScreen: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.header}>Bisa Enggress</Text>
       <View style={styles.actionButtons}>
-        <TouchableWithoutFeedback
-          onPressIn={() => setIsPressed1(true)}
-          onPressOut={() => setIsPressed1(false)}
-          onPress={() => setModalVisible('kembali')}
+      <Pressable
+          onPress={() => setModalVisible('kembali')} // Fix: Correct modal type
+          style={({ pressed }) => [
+            styles.button,
+            pressed ? styles.buttonActive : null, // Use null instead of false
+          ]}
         >
-          <View style={[styles.button, isPressed1 && styles.buttonActive]}>
-            <Text style={[styles.buttonText, isPressed1 && styles.buttonTextActive]}>
+          {({ pressed }) => ( // Pass pressed state to the Text component
+            <Text style={[
+              styles.buttonText,
+              pressed ? styles.buttonTextActive : null, // Change text color when pressed
+            ]}>
               Kembali
             </Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback
-          onPressIn={() => setIsPressed2(true)}
-          onPressOut={() => setIsPressed2(false)}
-          onPress={() => setModalVisible('nilai')}
+          )}
+        </Pressable>
+        <Pressable
+          onPress={() => setModalVisible('nilai')} // Fix: Correct modal type
+          style={({ pressed }) => [
+            styles.button,
+            pressed ? styles.buttonActive : null, // Use null instead of false
+          ]}
         >
-          <View style={[styles.button, isPressed2 && styles.buttonActive]}>
-            <Text style={[styles.buttonText, isPressed2 && styles.buttonTextActive]}>
+          {({ pressed }) => ( // Pass pressed state to the Text component
+            <Text style={[
+              styles.buttonText,
+              pressed ? styles.buttonTextActive : null, // Change text color when pressed
+            ]}>
               Nilai
             </Text>
-          </View>
-        </TouchableWithoutFeedback>
+          )}
+        </Pressable>
       </View>
       <ScrollView
         style={styles.chatbox}
@@ -81,7 +89,7 @@ const ChatbotTextScreen: React.FC = () => {
           onChangeText={setInput}
           editable={canSend} // Disable input when waiting for bot response
         />
-        <TouchableOpacity style={styles.sendButton} onPress={sendMessage} disabled={!canSend}>
+        <TouchableOpacity style={styles.sendButton} activeOpacity={0.6} onPress={sendMessage} disabled={!canSend}>
           <Text style={styles.sendButtonText}>Kirim</Text>
         </TouchableOpacity>
       </View>

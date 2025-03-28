@@ -63,10 +63,10 @@ const ResultScreen: React.FC = () => {
           </Text>
           {!hideButtons && ( // Conditionally render buttons
             <View style={styles.actionsButtons}>
-              <TouchableOpacity style={styles.button} onPress={takeScreenshot}>
+              <TouchableOpacity style={styles.button} activeOpacity={0.6} onPress={takeScreenshot}>
                 <Text style={styles.buttonText}>Screenshot</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
+              <TouchableOpacity style={styles.button} activeOpacity={0.6} onPress={() => navigation.navigate('Home')}>
                 <Text style={styles.buttonText}>Home</Text>
               </TouchableOpacity>
             </View>
