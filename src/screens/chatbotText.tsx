@@ -10,6 +10,8 @@ const ChatbotTextScreen: React.FC = () => {
   const [messages, setMessages] = useState<{text: string; sender: 'user' | 'bot'}[]>([]);
   const [input, setInput] = useState<string>('');
   const [canSend, setCanSend] = useState<boolean>(true); // State to control message alternation
+  const [isTyping, setIsTyping] = useState<boolean>(false); // State for typing animation
+  const [typingDots, setTypingDots] = useState<string>(''); // State for typing dots animation
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const scrollViewRef = useRef<ScrollView>(null); // Reference to the ScrollView
 
@@ -22,21 +24,37 @@ const ChatbotTextScreen: React.FC = () => {
     return () => backHandler.remove(); // Cleanup on unmount
   }, []);
 
+  useEffect(() => {
+    if (isTyping) {
+      const frames = ['.    ', '. .  ', '. . .'];
+      let frameIndex = 0;
+
+      const interval = setInterval(() => {
+        setTypingDots(frames[frameIndex]);
+        frameIndex = (frameIndex + 1) % frames.length; // Loop through frames
+      }, 500); // Update frame every 500ms
+
+      return () => clearInterval(interval); // Cleanup interval on unmount or when typing stops
+    }
+  }, [isTyping]);
+
   const sendMessage = () => {
     if (input.trim() && canSend) {
       // Add user message
       setMessages([...messages, {text: input, sender: 'user'}]);
       setInput('');
       setCanSend(false); // Disable sending until bot responds
+      setIsTyping(true); // Start typing animation
 
       // Simulate bot response after a delay
       setTimeout(() => {
+        setIsTyping(false); // Stop typing animation
         setMessages(prevMessages => [
           ...prevMessages,
           {text: 'Ini balasan dari chatbot.', sender: 'bot'},
         ]);
         setCanSend(true); // Re-enable sending after bot responds
-      }, 1000);
+      }, 5000); // Simulate 3 seconds delay for bot response
     }
   };
 
@@ -90,6 +108,9 @@ const ChatbotTextScreen: React.FC = () => {
             {message.text}
           </Text>
         ))}
+        {isTyping && (
+          <Text style={styles.botMessage}>{typingDots}</Text> // Display typing animation
+        )}
       </ScrollView>
       <View style={styles.inputContainer}>
         <TextInput
