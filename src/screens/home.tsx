@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Modal, BackHandler } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App'; // Import the ParamList type
@@ -7,6 +7,7 @@ import styles from '../styles/home.style';
 
 const HomeScreen: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [exitModalVisible, setExitModalVisible] = useState(false); // State for exit confirmation modal
   const [chatbotType, setChatbotType] = useState<'text' | 'speech'>('text');
   const [topicStarter, setTopicStarter] = useState<'kamu' | 'chatbot'>('kamu');
 
@@ -22,6 +23,21 @@ const HomeScreen: React.FC = () => {
     setModalVisible(false);
   };
 
+  const handleExitApp = () => {
+    BackHandler.exitApp(); // Exit the app
+  };
+
+  useEffect(() => {
+    const backAction = () => {
+      setExitModalVisible(true); // Show the exit confirmation modal
+      return true; // Prevent default back button behavior
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    return () => backHandler.remove(); // Cleanup the event listener
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Bisa Enggress</Text>
@@ -34,7 +50,7 @@ const HomeScreen: React.FC = () => {
         <Text style={styles.buttonText}>Mulai</Text>
       </TouchableOpacity>
 
-      {/* Modal */}
+      {/* Chatbot Selection Modal */}
       <Modal visible={modalVisible} transparent animationType="fade">
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -70,6 +86,30 @@ const HomeScreen: React.FC = () => {
         </View>
       </Modal>
 
+      {/* Exit Confirmation Modal */}
+      <Modal visible={exitModalVisible} transparent animationType="fade">
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Apakah Anda yakin ingin keluar dari aplikasi?</Text>
+            <View style={styles.actionButtons}>
+              <TouchableOpacity
+                style={styles.closeButton}
+                activeOpacity={0.6}
+                onPress={() => setExitModalVisible(false)}
+              >
+                <Text style={styles.buttonText2}>Tidak</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.nextButton}
+                activeOpacity={0.6}
+                onPress={handleExitApp}
+              >
+                <Text style={styles.buttonText2}>Ya</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };

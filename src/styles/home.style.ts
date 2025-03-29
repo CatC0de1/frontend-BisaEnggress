@@ -86,6 +86,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  modalText: {
+    fontSize: 18,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
