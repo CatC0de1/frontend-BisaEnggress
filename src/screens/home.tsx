@@ -51,7 +51,7 @@ const HomeScreen: React.FC = () => {
             <Text style={styles.modalTitle}>Pilih Pembuka Topik</Text>
             <View style={styles.optionGroup}>
               <TouchableOpacity onPress={() => setTopicStarter('kamu')}>
-                <Text style={[styles.option, topicStarter === 'kamu' && styles.selectedOption]}>Kamu</Text>
+                <Text style={[styles.option, topicStarter === 'kamu' && styles.selectedOption]}>Anda</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setTopicStarter('chatbot')}>
                 <Text style={[styles.option, topicStarter === 'chatbot' && styles.selectedOption]}>Chatbot</Text>

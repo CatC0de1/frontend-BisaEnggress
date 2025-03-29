@@ -4,33 +4,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 60, // Adjust for header height
+    paddingTop: 100, // Add padding to account for the header height
   },
 
   header: {
+    position: 'absolute',
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // height: 100, // Set a fixed height for the header
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    elevation: 5, // Shadow for Android
+    shadowColor: '#000', // Shadow for iOS
+    // shadowOffset: {width: 0, height: 2}, // Shadow only at the bottom
+    // shadowOpacity: 0.2,
+    // shadowRadius: 3,
+    backgroundColor: '#fff',
+    justifyContent: 'center', // Center content vertically
+  },
+
+  headerTitle: {
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#fff',
-    padding: 20,
-    backgroundColor: '#3b82f6',
-    // borderBottomWidth: 1,
-    // borderBottomColor: '#ddd',
-    elevation: 50, // Enhanced shadow for Android
-    shadowColor: '#000', // Enhanced shadow for iOS
-    shadowOffset: {width: 0, height: 40},
-    shadowOpacity: 0.9,
-    shadowRadius: 50,
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 1,
+    color: '#3498db',
+    paddingTop: 10,
   },
 
   actionButtons: {
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 20,
     padding: 10,
   },
 
@@ -38,7 +43,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#3b82f6',
     borderRadius: 8,
-    paddingVertical: 5,
+    paddingVertical: 2,
     paddingHorizontal: 20,
     width: '48%',
     alignItems: 'center',
@@ -66,6 +71,11 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
     backgroundColor: '#f9f9f9',
+    elevation: 3, // Shadow for Android
+    shadowColor: '#000', // Shadow for iOS
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
 
   chatMessage: {
@@ -91,8 +101,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
-    borderTopWidth: 1,
+    // borderTopWidth: 1,
     borderTopColor: '#ccc',
+    elevation: 1, // Shadow for Android
+    shadowColor: '#000', // Shadow for iOS
+    shadowOffset: {width: 0, height: -1},
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
 
   input: {

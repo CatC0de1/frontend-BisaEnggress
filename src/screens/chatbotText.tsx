@@ -33,40 +33,42 @@ const ChatbotTextScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Bisa Enggress</Text>
-      <View style={styles.actionButtons}>
-        <Pressable
-          onPress={() => setModalVisible('kembali')} // Fix: Correct modal type
-          style={({ pressed }) => [
-            styles.button,
-            pressed ? styles.buttonActive : null, // Use null instead of false
-          ]}
-        >
-          {({ pressed }) => ( // Pass pressed state to the Text component
-            <Text style={[
-              styles.buttonText,
-              pressed ? styles.buttonTextActive : null, // Change text color when pressed
-            ]}>
-              Kembali
-            </Text>
-          )}
-        </Pressable>
-        <Pressable
-          onPress={() => setModalVisible('nilai')} // Fix: Correct modal type
-          style={({ pressed }) => [
-            styles.button,
-            pressed ? styles.buttonActive : null, // Use null instead of false
-          ]}
-        >
-          {({ pressed }) => ( // Pass pressed state to the Text component
-            <Text style={[
-              styles.buttonText,
-              pressed ? styles.buttonTextActive : null, // Change text color when pressed
-            ]}>
-              Nilai
-            </Text>
-          )}
-        </Pressable>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Bisa Enggress</Text>
+        <View style={styles.actionButtons}>
+          <Pressable
+            onPress={() => setModalVisible('kembali')} // Fix: Correct modal type
+            style={({ pressed }) => [
+              styles.button,
+              pressed ? styles.buttonActive : null, // Use null instead of false
+            ]}
+          >
+            {({ pressed }) => ( // Pass pressed state to the Text component
+              <Text style={[
+                styles.buttonText,
+                pressed ? styles.buttonTextActive : null, // Change text color when pressed
+              ]}>
+                Kembali
+              </Text>
+            )}
+          </Pressable>
+          <Pressable
+            onPress={() => setModalVisible('nilai')} // Fix: Correct modal type
+            style={({ pressed }) => [
+              styles.button,
+              pressed ? styles.buttonActive : null, // Use null instead of false
+            ]}
+          >
+            {({ pressed }) => ( // Pass pressed state to the Text component
+              <Text style={[
+                styles.buttonText,
+                pressed ? styles.buttonTextActive : null, // Change text color when pressed
+              ]}>
+                Nilai
+              </Text>
+            )}
+          </Pressable>
+        </View>
       </View>
       <ScrollView
         style={styles.chatbox}

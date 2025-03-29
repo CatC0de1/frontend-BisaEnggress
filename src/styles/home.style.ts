@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
-    elevation: 3, // Shadow for Android
+    elevation: 5, // Shadow for Android
     shadowColor: '#000', // Shadow for iOS
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.2,

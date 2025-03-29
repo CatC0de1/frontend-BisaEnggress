@@ -67,11 +67,21 @@ const ResultScreen: React.FC = () => {
           <Text style={styles.header}>Bisa Enggress</Text>
           <View style={styles.content}>
             <Text style={styles.title}>Hasil</Text>
-            <Text style={styles.contentText}>
-              Selamat! Anda telah menyelesaikan percakapan. Nilai kemampuan bahasa
-              Inggris Anda adalah 85/100.
-              Sepertinya Anda Bisa Enggress!
-            </Text>
+            <View>
+
+              {/* sample prompt result */}
+              <Text style={styles.contentText}>
+                Bahasa Inggris Anda cukup mudah dipahami walau terkadang terdapat kesalahan grammar.
+              </Text>
+              <Text style={styles.nilaiContent}>
+                Grammar    : <Text style={styles.nilai}>75% (cukup bagus)</Text>
+              </Text>
+              <Text style={styles.nilaiContent}>
+                Vocabulary : <Text style={styles.nilai}>85% (bagus)</Text>
+              </Text>
+              <Text style={styles.contentText}>Sepertinya Anda <Text style={styles.titleDrop}>Bisa Enggress</Text>!</Text>
+
+            </View>
             {!hideButtons && (
               <View style={styles.actionsButtons}>
                 <TouchableOpacity style={styles.button} activeOpacity={0.6} onPress={takeScreenshot}>
