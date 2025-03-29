@@ -5,7 +5,7 @@ import Icon2 from 'react-native-vector-icons/Feather';
 import Icon3 from 'react-native-vector-icons/Entypo';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../App'; // Import the ParamList type
+import {RootStackParamList} from '../components/dataType';
 import styles from '../styles/chatbotSpeech.style';
 import { useConnectionErrorToast } from '../components/ConnectionToast'; // Import the hook
 

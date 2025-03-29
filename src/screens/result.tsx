@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import {View, Text, TouchableOpacity, BackHandler} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../App'; // Import the ParamList type
+import { RootStackParamList } from '../components/dataType';
 import ConfettiCannon from 'react-native-confetti-cannon'; // Import confetti cannon
 import ViewShot from 'react-native-view-shot'; // Import ViewShot for screenshots
 import RNFS from 'react-native-fs'; // Import RNFS for file handling

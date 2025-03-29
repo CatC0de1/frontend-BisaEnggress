@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import {View, Text, TextInput, Pressable, ScrollView, Modal, TouchableOpacity, BackHandler} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../App'; // Import the ParamList type
+import {RootStackParamList} from '../components/dataType';
 import styles from '../styles/chatbotText.style';
 import { useConnectionErrorToast } from '../components/ConnectionToast'; // Import the hook
 

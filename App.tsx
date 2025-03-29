@@ -7,15 +7,7 @@ import ChatbotSpeech from './src/screens/chatbotSpeech';
 import Result from './src/screens/result';
 import SplashScreen from './src/screens/splash';
 import Toast from 'react-native-toast-message';
-
-// Define the type for the navigation parameters
-export type RootStackParamList = {
-  Splash: undefined;
-  Home: undefined;
-  ChatbotText: {topicStarter: 'kamu' | 'chatbot'};
-  ChatbotSpeech: {topicStarter: 'kamu' | 'chatbot'};
-  Result: undefined;
-};
+import { RootStackParamList } from './src/components/dataType'; // Import the type
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
