@@ -5,9 +5,11 @@ import Home from './src/screens/home';
 import ChatbotText from './src/screens/chatbotText';
 import ChatbotSpeech from './src/screens/chatbotSpeech';
 import Result from './src/screens/result';
+import SplashScreen from './src/screens/splash';
 
 // Define the type for the navigation parameters
 export type RootStackParamList = {
+  Splash: undefined; // Add Splash to the navigation stack
   Home: undefined;
   ChatbotText: {topicStarter: 'kamu' | 'chatbot'};
   ChatbotSpeech: {topicStarter: 'kamu' | 'chatbot'};
@@ -19,7 +21,14 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
+      <Stack.Navigator
+        initialRouteName="Splash"
+        screenOptions={{
+          headerShown: false,
+          animation: 'fade', // Enable fade animation for screen transitions
+        }}
+      >
+        <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="ChatbotText" component={ChatbotText} />
         <Stack.Screen name="ChatbotSpeech" component={ChatbotSpeech} />
