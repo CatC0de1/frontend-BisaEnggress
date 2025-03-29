@@ -7,6 +7,7 @@ import ConfettiCannon from 'react-native-confetti-cannon'; // Import confetti ca
 import ViewShot from 'react-native-view-shot'; // Import ViewShot for screenshots
 import RNFS from 'react-native-fs'; // Import RNFS for file handling
 import Toast from 'react-native-toast-message'; // Import Toast for notifications
+import { useConnectionErrorToast } from '../components/ConnectionToast'; // Import the hook
 import styles from '../styles/result.style';
 
 const ResultScreen: React.FC = () => {
@@ -30,6 +31,9 @@ const ResultScreen: React.FC = () => {
       clearTimeout(timer);
     };
   }, [navigation]);
+
+  // Toast for connection error
+  // useConnectionErrorToast();
 
   const takeScreenshot = () => {
     setHideButtons(true); // Hide buttons before taking the screenshot

@@ -7,6 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App'; // Import the ParamList type
 import styles from '../styles/chatbotSpeech.style';
+import { useConnectionErrorToast } from '../components/ConnectionToast'; // Import the hook
 
 const ChatbotSpeechScreen: React.FC = () => {
 
@@ -42,6 +43,9 @@ const ChatbotSpeechScreen: React.FC = () => {
 
     return () => backHandler.remove(); // Cleanup on unmount
   }, []);
+
+  // Toast for connection error
+  // useConnectionErrorToast();
 
   const startBlinking = () => {
     Animated.loop(

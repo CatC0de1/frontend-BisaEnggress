@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App'; // Import the ParamList type
 import styles from '../styles/home.style';
+import { useConnectionErrorToast } from '../components/ConnectionToast'; // Import the toast function and hook
 
 const HomeScreen: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -37,6 +38,9 @@ const HomeScreen: React.FC = () => {
 
     return () => backHandler.remove(); // Cleanup the event listener
   }, []);
+
+  // Toast for connection error
+  // useConnectionErrorToast();  // use hook for call toast
 
   return (
     <View style={styles.container}>

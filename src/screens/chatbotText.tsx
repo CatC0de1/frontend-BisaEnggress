@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App'; // Import the ParamList type
 import styles from '../styles/chatbotText.style';
+import { useConnectionErrorToast } from '../components/ConnectionToast'; // Import the hook
 
 const ChatbotTextScreen: React.FC = () => {
   const [modalVisible, setModalVisible] = useState<'kembali' | 'nilai' | null>(null);
@@ -37,6 +38,9 @@ const ChatbotTextScreen: React.FC = () => {
       return () => clearInterval(interval); // Cleanup interval on unmount or when typing stops
     }
   }, [isTyping]);
+
+  // Toast for connection error
+  // useConnectionErrorToast();
 
   const sendMessage = () => {
     if (input.trim() && canSend) {
