@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {View, Text, TouchableOpacity, Pressable, Modal, Animated, Easing} from 'react-native';
+import {View, Text, TouchableOpacity, Pressable, Modal, Animated, Easing, BackHandler} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome icons
 import Icon2 from 'react-native-vector-icons/Feather';
 import Icon3 from 'react-native-vector-icons/Entypo';
@@ -33,6 +33,15 @@ const ChatbotSpeechScreen: React.FC = () => {
     }, 750); // Change Icon3 every 750ms
     return () => clearInterval(interval);
   }, [icons3.length]);
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      setModalVisible('kembali'); // Show "kembali" modal
+      return true; // Prevent default back behavior
+    });
+
+    return () => backHandler.remove(); // Cleanup on unmount
+  }, []);
 
   const startBlinking = () => {
     Animated.loop(

@@ -1,5 +1,5 @@
-import React, {useState, useRef} from 'react';
-import {View, Text, TextInput, Pressable, ScrollView, Modal, TouchableOpacity} from 'react-native';
+import React, {useState, useRef, useEffect} from 'react';
+import {View, Text, TextInput, Pressable, ScrollView, Modal, TouchableOpacity, BackHandler} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App'; // Import the ParamList type
@@ -12,6 +12,15 @@ const ChatbotTextScreen: React.FC = () => {
   const [canSend, setCanSend] = useState<boolean>(true); // State to control message alternation
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const scrollViewRef = useRef<ScrollView>(null); // Reference to the ScrollView
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      setModalVisible('kembali'); // Show "kembali" modal
+      return true; // Prevent default back behavior
+    });
+
+    return () => backHandler.remove(); // Cleanup on unmount
+  }, []);
 
   const sendMessage = () => {
     if (input.trim() && canSend) {
