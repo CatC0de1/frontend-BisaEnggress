@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 100, // Add padding to account for the header height
+    paddingTop: 100,
   },
 
   header: {
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     // top: 0,
     // left: 0,
     // right: 0,
-    // height: 100, // Set a fixed height for the header
+    // height: 100,
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
     elevation: 5, // Shadow for Android
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.2,
     // shadowRadius: 3,
     backgroundColor: '#fff',
-    justifyContent: 'center', // Center content vertically
+    justifyContent: 'center',
   },
 
   headerTitle: {
@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
   },
 
   chatMessage: {
-    alignSelf: 'flex-end', // Align to the right for user messages
-    maxWidth: '65%', // Maximum width of 65%
+    alignSelf: 'flex-end',
+    maxWidth: '65%',
     marginVertical: 5,
     padding: 10,
     borderRadius: 5,
@@ -88,13 +88,13 @@ const styles = StyleSheet.create({
   },
 
   botMessage: {
-    alignSelf: 'flex-start', // Align to the left for bot messages
-    maxWidth: '65%', // Maximum width of 65%
+    alignSelf: 'flex-start',
+    maxWidth: '65%',
     marginVertical: 5,
     padding: 10,
     borderRadius: 5,
-    backgroundColor: '#3b82f6', // Blue background for bot messages
-    color: '#fff', // White text color
+    backgroundColor: '#3b82f6',
+    color: '#fff',
   },
 
   inputContainer: {

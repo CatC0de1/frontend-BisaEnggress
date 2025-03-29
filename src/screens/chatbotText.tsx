@@ -46,7 +46,7 @@ const ChatbotTextScreen: React.FC = () => {
         <Text style={styles.headerTitle}>Bisa Enggress</Text>
         <View style={styles.actionButtons}>
           <Pressable
-            onPress={() => setModalVisible('kembali')} // Fix: Correct modal type
+            onPress={() => setModalVisible('kembali')}
             style={({ pressed }) => [
               styles.button,
               pressed ? styles.buttonActive : null, // Use null instead of false
@@ -62,7 +62,7 @@ const ChatbotTextScreen: React.FC = () => {
             )}
           </Pressable>
           <Pressable
-            onPress={() => setModalVisible('nilai')} // Fix: Correct modal type
+            onPress={() => setModalVisible('nilai')}
             style={({ pressed }) => [
               styles.button,
               pressed ? styles.buttonActive : null, // Use null instead of false

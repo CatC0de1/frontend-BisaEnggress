@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 60, // Adjust for header height
+    paddingTop: 60,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: -1,
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 20,
     backgroundColor: '#fff',
-    elevation: 5, // Enhanced shadow for Android
-    shadowColor: '#000', // Enhanced shadow for iOS
+    elevation: 5, // Shadow for Android
+    shadowColor: '#000', // Shadow for iOS
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.3,
     shadowRadius: 5,

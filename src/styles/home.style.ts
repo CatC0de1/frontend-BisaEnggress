@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
-    paddingTop: 60, // Adjust for header height
+    paddingTop: 60,
     gap: 25,
   },
 

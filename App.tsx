@@ -9,7 +9,7 @@ import SplashScreen from './src/screens/splash';
 
 // Define the type for the navigation parameters
 export type RootStackParamList = {
-  Splash: undefined; // Add Splash to the navigation stack
+  Splash: undefined;
   Home: undefined;
   ChatbotText: {topicStarter: 'kamu' | 'chatbot'};
   ChatbotSpeech: {topicStarter: 'kamu' | 'chatbot'};
@@ -25,7 +25,7 @@ function App(): React.JSX.Element {
         initialRouteName="Splash"
         screenOptions={{
           headerShown: false,
-          animation: 'fade', // Enable fade animation for screen transitions
+          animation: 'fade',
         }}
       >
         <Stack.Screen name="Splash" component={SplashScreen} />

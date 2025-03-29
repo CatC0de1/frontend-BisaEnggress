@@ -13,7 +13,7 @@ const SplashScreen: React.FC = () => {
     // Start the fade-in animation
     Animated.timing(fadeAnim, {
       toValue: 1, // Final opacity is 1
-      duration: 1000, // Animation duration in milliseconds
+      duration: 1000,
       useNativeDriver: true,
     }).start();
 

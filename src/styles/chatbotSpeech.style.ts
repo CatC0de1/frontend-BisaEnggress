@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 60, // Adjust for header height
+    paddingTop: 60,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     top: 0,
     // left: 0,
     // right: 0,
-    // height: 100, // Set a fixed height for the header
+    // height: 100,
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
     elevation: 5, // Shadow for Android
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.2,
     // shadowRadius: 3,
     backgroundColor: '#fff',
-    justifyContent: 'center', // Center content vertically
+    justifyContent: 'center',
   },
 
   headerTitle: {
@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5, // Shadow for Android
-    position: 'relative', // Ensure proper positioning
   },
 
   speechButtonText: {

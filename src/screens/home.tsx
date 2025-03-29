@@ -7,7 +7,7 @@ import styles from '../styles/home.style';
 
 const HomeScreen: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [exitModalVisible, setExitModalVisible] = useState(false); // State for exit confirmation modal
+  const [exitModalVisible, setExitModalVisible] = useState(false);
   const [chatbotType, setChatbotType] = useState<'text' | 'speech'>('text');
   const [topicStarter, setTopicStarter] = useState<'kamu' | 'chatbot'>('kamu');
 
