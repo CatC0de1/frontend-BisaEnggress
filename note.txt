@@ -1,0 +1,51 @@
+Ini adalah catatan tambahan untuk memulai react-native-cli (tanpa framework bermodal usb debugging).
+Untuk selanjutnya, saya menyarankan 10 miliar persen untuk menggunakan android studio atau emulator.
+
+
+A. Alat yang Dibutuhkan
+1. Node.js
+Install Node.js untuk berperan sebagai native language dalam react-native. Install Node.js di https://nodejs.org/ serta install package nya seperti npm atau yarn. Jika sudah di install, konfirmasi di terminal dengan :
+- node -v 
+- npm -v
+
+
+2. Java Development Kit (JDK)
+JDK digunakan untuk development android. JDK dapat di download melalui https://adoptium.net/. Disarankan untuk menginstall versi 11 ke atas. Jika sudah diinstall, tambahkan path environment nya (jika perlu) dengan directory penginstallannya. 
+Contoh, C:\jdk-(versi JDK)\bin.
+
+Setelah itu, tambahkan system environment dengan nama variable JAVA_HOME dan dengan variable value C:\jdk-(versi JDK). Lalu isi path system environment JAVA_HOME dengan %JAVA_HOME%\bin.
+iii.Android Studio Command Tools
+Diperlukan untuk proses debug pada android secara native dengan JDK. Android Studio Command Tools dapat diunduh pada situs resmi seperti https://developer.android.com/studio#command-tools di bagian command line-tools only. 
+Pastikan platform-tools, cmdline-tools\bin, dan build-tools ada. Jika tidak ada, harus diinstall secara terpisah dari sumber lain.
+Setelah itu, tambahkan system environment dengan nama variable ANDROID_HOME dan variable value dengan path C:\Android\sdk. Setelah itu, tambahkan 3 path system environment variable sebagai berikut :
+	- %ANDROID_HOME%\platform-tools
+	- %ANDROID_HOME%\cmdline-tools\bin
+	- %ANDROID_HOME%\build-tools
+iv.Visual Studio Code
+Visual Studio Code adalah IDE yang digunakan untuk development Android melalui USB debugging. Instalasi dan konfigurasi lengkap dapat dilihat melalui https://code.visualstudio.com/.
+ 
+ 
+B.Proses Debugging
+1. Konfigurasi Android
+Untuk mengaktifkan USB Debugging pada android, buka settings lalu cari versi OS dan ketuk 7 kali. Setelah developer title sudah diberikan, developer options muncul pada settings
+Di developer options, izinkan: 
+- USB debugging, 
+- Install via USB, 
+- USB debugging(Security settings), 
+- Verify apps over USB (*untuk tahap lanjut seperti deployment),
+- Verify bytecode of debuggable apps.
+Setelah itu, hubungkan android dengan usb ke PC lalu izinkan developer mode(jika ada konfirmasi tambahan) dan cek melalui terminal dengan adb devices. Jika muncul seperti berikut, 
+jjx*********** devices
+maka konfigurasi USB debugging pada android berhasil.
+Jika ingin melakukan debugging via bluetooth atau via hotspot, dapat dilakukan konfigurasi nya di developer options atau kocok android beberapa detik.
+PERINGATAN, USB debugging membuat sistem atau file android rentan dimanipulasi melalui PC. Pastikan PC aman dan hanya dipakai pada PC atau orang terpercaya. Terutama jika menggunakan non USB, pastikan USB debugging dimatikan setelah dipakai. 
+
+
+2. React-Native-Cli
+Project react-native-cli dapat dimulai dengan menginstal react-native-cli di terminal dengan perintah :
+npx @react-native-community/cli@latest init (nama_project)
+
+Pastikan tidak diinstal secara global (-g). Setelah itu tunggu terinisiasi project nya dan lakukan perintah yang ada ketika disuruh memilih konfigurasi tambahan atau log pada error
+Setelah itu, project dapat dimulai dengan menjalankan npx react-native start untuk menjalankan metro dan pastikan metro tetap ada selama proses debugging. 
+Kemudian buka terminal baru dan jalankan perintah npx react-native run-android dan tunggu proses nya dan standby untuk terima notifikasi debugging pada android.
+Setelah berhasil dalam mode debugging, implementasi design dapat dilakukan langsung dengan merubah program react pada tsx/jsx atau ts/js. Perubahan akan terjadi ketika save file karena react native sudah hot reload.
