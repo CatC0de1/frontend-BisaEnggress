@@ -5,6 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../components/dataType';
 import styles from '../styles/home.style';
 import { useConnectionErrorToast } from '../components/ConnectionToast'; // Import the toast function and hook
+import Header from '../components/Header'; // Import the reusable Header component
 
 const HomeScreen: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,7 +45,7 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Bisa Enggress</Text>
+      <Header />
       <View style={styles.content}>
         <Text style={styles.contentText}>Dengan <Text style={styles.title}>Bisa Enggress</Text>,</Text>
         <Text style={styles.contentText}>jangan katakan</Text>
