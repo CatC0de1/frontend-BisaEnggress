@@ -5,8 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/screens';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import ViewShot from 'react-native-view-shot';
-import Header from '../components/Header';
-import Toast, { useScreenshot, useConnectionErrorToast } from '../components/Toast'; // Correctly import Toast and useScreenshot
+import Toast, { useScreenshot, useConnectionErrorToast } from '../components/Toast'; // Import useScreenshot hook
 import styles from '../styles/result.style';
 
 const ResultScreen: React.FC = () => {
@@ -33,18 +32,15 @@ const ResultScreen: React.FC = () => {
   // Toast for connection error
   // useConnectionErrorToast();
 
+  // Toaast to take screenshot
+  takeScreenshot();
+
   return (
     <>
       <ViewShot ref={viewShotRef} options={{ format: 'png', quality: 0.9 }} style={{ flex: 1 }}>
         <View style={styles.container}>
-          {showConfetti &&
-            <View style={styles.confetti}>
-              <ConfettiCannon count={100} origin={{ x: 0, y: 0 }} />
-            </View>
-          }
-
-          <Header />
-
+          {showConfetti && <ConfettiCannon count={100} origin={{ x: 0, y: 0 }} />}
+          <Text style={styles.header}>Bisa Enggress</Text>
           <View style={styles.content}>
             <Text style={styles.title}>Hasil</Text>
             <View>
@@ -62,8 +58,8 @@ const ResultScreen: React.FC = () => {
               <Text style={styles.contentText}>
                 Sepertinya Anda <Text style={styles.titleDrop}>Bisa Enggress</Text>!
               </Text>
-            </View>
 
+            </View>
             {!hideButtons && (
               <View style={styles.actionsButtons}>
                 <TouchableOpacity style={styles.button} activeOpacity={0.6} onPress={takeScreenshot}>
@@ -74,7 +70,6 @@ const ResultScreen: React.FC = () => {
                 </TouchableOpacity>
               </View>
             )}
-
           </View>
         </View>
       </ViewShot>

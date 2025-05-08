@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, BackHandler } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../components/dataType';
+import { RootStackParamList } from '../types/screens';
 import styles from '../styles/home.style';
-import { useConnectionErrorToast } from '../components/ConnectionToast'; // Import the toast function and hook
+import { useConnectionErrorToast } from '../components/Toast'; // Import the toast function and hook
 import Header from '../components/Header'; // Import the reusable Header component
 
 const HomeScreen: React.FC = () => {

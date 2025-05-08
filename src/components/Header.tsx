@@ -1,7 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ViewStyle } from 'react-native';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  style?: ViewStyle; // Optional prop for custom styles
+}
+
+const Header: React.FC<HeaderProps> = () => {
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.headerText}>Bisa Enggress</Text>
@@ -23,8 +27,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: '100%',
-    zIndex: 1,
+    // zIndex: 1,
   },
+
   headerText: {
     fontSize: 30,
     fontWeight: 'bold',

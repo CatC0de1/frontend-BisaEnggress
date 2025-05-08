@@ -1,29 +1,17 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {View, Text, TextInput, Pressable, ScrollView, Modal, TouchableOpacity, BackHandler} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../components/dataType';
+import {View, Text, TextInput, ScrollView, TouchableOpacity} from 'react-native';
 import styles from '../styles/chatbotText.style';
-import { useConnectionErrorToast } from '../components/ConnectionToast'; // Import the hook
+import { useConnectionErrorToast } from '../components/Toast'; // Import the hook
+import HeaderAndModal from '../components/HeaderAndModal';
 
 const ChatbotTextScreen: React.FC = () => {
-  const [modalVisible, setModalVisible] = useState<'kembali' | 'nilai' | null>(null);
+
   const [messages, setMessages] = useState<{text: string; sender: 'user' | 'bot'}[]>([]);
   const [input, setInput] = useState<string>('');
   const [canSend, setCanSend] = useState<boolean>(true); // State to control message alternation
   const [isTyping, setIsTyping] = useState<boolean>(false); // State for typing animation
   const [typingDots, setTypingDots] = useState<string>(''); // State for typing dots animation
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const scrollViewRef = useRef<ScrollView>(null); // Reference to the ScrollView
-
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      setModalVisible('kembali'); // Show "kembali" modal
-      return true; // Prevent default back behavior
-    });
-
-    return () => backHandler.remove(); // Cleanup on unmount
-  }, []);
 
   useEffect(() => {
     if (isTyping) {
@@ -64,43 +52,9 @@ const ChatbotTextScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Bisa Enggress</Text>
-        <View style={styles.actionButtons}>
-          <Pressable
-            onPress={() => setModalVisible('kembali')}
-            style={({ pressed }) => [
-              styles.button,
-              pressed ? styles.buttonActive : null, // Use null instead of false
-            ]}
-          >
-            {({ pressed }) => ( // Pass pressed state to the Text component
-              <Text style={[
-                styles.buttonText,
-                pressed ? styles.buttonTextActive : null, // Change text color when pressed
-              ]}>
-                Kembali
-              </Text>
-            )}
-          </Pressable>
-          <Pressable
-            onPress={() => setModalVisible('nilai')}
-            style={({ pressed }) => [
-              styles.button,
-              pressed ? styles.buttonActive : null, // Use null instead of false
-            ]}
-          >
-            {({ pressed }) => ( // Pass pressed state to the Text component
-              <Text style={[
-                styles.buttonText,
-                pressed ? styles.buttonTextActive : null, // Change text color when pressed
-              ]}>
-                Nilai
-              </Text>
-            )}
-          </Pressable>
-        </View>
-      </View>
+
+      <HeaderAndModal />
+
       <ScrollView
         style={styles.chatbox}
         ref={scrollViewRef}
@@ -130,50 +84,6 @@ const ChatbotTextScreen: React.FC = () => {
         </TouchableOpacity>
       </View>
 
-      {/* Modal for "Kembali" */}
-      <Modal visible={modalVisible === 'kembali'} transparent animationType="fade">
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Ingin keluar dari percakapan?</Text>
-            <Text style={styles.modalText}>Percakapan akan hilang setelah keluar!</Text>
-            <View style={styles.actionButtonsModal}>
-              <TouchableOpacity style={styles.modalButton1} onPress={() => setModalVisible(null)}>
-                <Text style={styles.modalButtonText}>Tidak</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButton2}
-                onPress={() => {
-                  setModalVisible(null);
-                  navigation.navigate('Home');
-                }}>
-                <Text style={styles.modalButtonText}>Ya</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-
-      {/* Modal for "Nilai" */}
-      <Modal visible={modalVisible === 'nilai'} transparent animationType="fade">
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Ingin menyudahi percakapan lalu melihat nilai kemampuan bahasa Inggrismu?</Text>
-            <View style={styles.actionButtonsModal}>
-              <TouchableOpacity style={styles.modalButton1} onPress={() => setModalVisible(null)}>
-                <Text style={styles.modalButtonText}>Tidak</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButton2}
-                onPress={() => {
-                  setModalVisible(null);
-                  navigation.navigate('Result');
-                }}>
-                <Text style={styles.modalButtonText}>Ya</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
     </View>
   );
 };

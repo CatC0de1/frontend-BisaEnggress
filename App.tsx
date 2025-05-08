@@ -7,7 +7,7 @@ import ChatbotSpeech from './src/screens/chatbotSpeech';
 import Result from './src/screens/result';
 import SplashScreen from './src/screens/splash';
 import Toast from 'react-native-toast-message';
-import { RootStackParamList } from './src/components/dataType';
+import { RootStackParamList } from './src/types/screens';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

@@ -10,26 +10,6 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
 
-  header: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#3498db',
-    padding: 20,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
-    elevation: 5, // Shadow for Android
-    shadowColor: '#000', // Shadow for iOS
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: -21,
-  },
-
   content: {
     width: '80%',
     padding: 20,
@@ -46,6 +26,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     zIndex: -2,
+  },
+
+  confetti: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    zIndex: 10,
   },
 
   title: {

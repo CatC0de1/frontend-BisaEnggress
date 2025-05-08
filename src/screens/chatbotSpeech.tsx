@@ -1,18 +1,14 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {View, Text, TouchableOpacity, Pressable, Modal, Animated, Easing, BackHandler} from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, TouchableOpacity, Animated, Easing } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome icons
 import Icon2 from 'react-native-vector-icons/Feather';
 import Icon3 from 'react-native-vector-icons/Entypo';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../components/dataType';
 import styles from '../styles/chatbotSpeech.style';
-import { useConnectionErrorToast } from '../components/ConnectionToast'; // Import the hook
+import { useConnectionErrorToast } from '../components/Toast'; // Import the hook
+import HeaderAndModal from '../components/HeaderAndModal';
 
 const ChatbotSpeechScreen: React.FC = () => {
 
-  const [modalVisible, setModalVisible] = useState<'kembali' | 'nilai' | null>(null);
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [icon2Index, seticon2Index] = useState(0);
   const [icon3Index, setIcon3Index] = useState(0);
   const [isHolding, setIsHolding] = useState(false); // State to track button hold
@@ -34,15 +30,6 @@ const ChatbotSpeechScreen: React.FC = () => {
     }, 750); // Change Icon3 every 750ms
     return () => clearInterval(interval);
   }, [icons3.length]);
-
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      setModalVisible('kembali'); // Show "kembali" modal
-      return true; // Prevent default back behavior
-    });
-
-    return () => backHandler.remove(); // Cleanup on unmount
-  }, []);
 
   // Toast for connection error
   // useConnectionErrorToast();
@@ -73,53 +60,20 @@ const ChatbotSpeechScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Bisa Enggress</Text>
-        <View style={styles.actionButtons}>
-          <Pressable
-            onPress={() => setModalVisible('kembali')}
-            style={({ pressed }) => [
-              styles.button,
-              pressed ? styles.buttonActive : null, // Use null instead of false
-            ]}
-          >
-            {({ pressed }) => ( // Pass pressed state to the Text component
-              <Text style={[
-                styles.buttonText,
-                pressed ? styles.buttonTextActive : null, // Change text color when pressed
-              ]}>
-                Kembali
-              </Text>
-            )}
-          </Pressable>
-          <Pressable
-            onPress={() => setModalVisible('nilai')}
-            style={({ pressed }) => [
-              styles.button,
-              pressed ? styles.buttonActive : null, // Use null instead of false
-            ]}
-          >
-            {({ pressed }) => ( // Pass pressed state to the Text component
-              <Text style={[
-                styles.buttonText,
-                pressed ? styles.buttonTextActive : null, // Change text color when pressed
-              ]}>
-                Nilai
-              </Text>
-            )}
-          </Pressable>
-        </View>
-      </View>
+
+      <HeaderAndModal />
 
       {/* bot */}
       {/* <View style={styles.botSpeech}>
         <Icon2 name={icons2[icon2Index]} size={90} color="#fff" />
       </View> */}
+      {/* end of bot */}
 
       {/* waiting */}
       {/* <View style={styles.progressSpeech}>
         <Icon3 name={icons3[icon3Index]} size={50} color="#fff" />
       </View> */}
+      {/* end of waiting */}
 
       {/* record */}
       <Animated.View
@@ -149,51 +103,7 @@ const ChatbotSpeechScreen: React.FC = () => {
           <Text style={styles.speechButtonText}>Tahan untuk bicara</Text>
         </TouchableOpacity>
       </Animated.View>
-
-
-      {/* Modal */}
-      <Modal visible={modalVisible === 'kembali'} transparent animationType="fade">
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Ingin keluar dari percakapan?</Text>
-            <Text style={styles.modalText}>Percakapan akan hilang setelah keluar!</Text>
-            <View style={styles.actionButtonsModal}>
-              <TouchableOpacity style={styles.modalButton1} onPress={() => setModalVisible(null)}>
-                <Text style={styles.modalButtonText}>Tidak</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButton2}
-                onPress={() => {
-                  setModalVisible(null);
-                  navigation.navigate('Home');
-                }}>
-                <Text style={styles.modalButtonText}>Ya</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-
-      <Modal visible={modalVisible === 'nilai'} transparent animationType="fade">
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Ingin menyudahi percakapan lalu melihat nilai kemampuan bahasa Inggrismu?</Text>
-            <View style={styles.actionButtonsModal}>
-              <TouchableOpacity style={styles.modalButton1} onPress={() => setModalVisible(null)}>
-                <Text style={styles.modalButtonText}>Tidak</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButton2}
-                onPress={() => {
-                  setModalVisible(null);
-                  navigation.navigate('Result');
-                }}>
-                <Text style={styles.modalButtonText}>Ya</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      {/* end of record */}
 
     </View>
   );
