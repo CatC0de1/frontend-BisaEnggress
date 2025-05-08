@@ -77,3 +77,4 @@ yarn-error.log
 # others
 .vdcode/
 .bundle/
+.env
