@@ -3,6 +3,7 @@ import {View, Text, TextInput, ScrollView, TouchableOpacity} from 'react-native'
 import styles from '../styles/chatbotText.style';
 import { useConnectionErrorToast } from '../components/Toast'; // Import the hook
 import HeaderAndModal from '../components/HeaderAndModal';
+import { sendMessageToAi } from '../utils/ai'; // Import the API utility
 
 const ChatbotTextScreen: React.FC = () => {
 
@@ -30,23 +31,35 @@ const ChatbotTextScreen: React.FC = () => {
   // Toast for connection error
   // useConnectionErrorToast();
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (input.trim() && canSend) {
       // Add user message
-      setMessages([...messages, {text: input, sender: 'user'}]);
+      const userMessage = { text: input, sender: 'user' as const };
+      setMessages([...messages, userMessage]);
       setInput('');
       setCanSend(false); // Disable sending until bot responds
       setIsTyping(true); // Start typing animation
 
-      // Simulate bot response after a delay
-      setTimeout(() => {
-        setIsTyping(false); // Stop typing animation
+      try {
+        // Send user message to ChatGPT
+        const botResponse = await sendMessageToAi([
+          { role: 'user', content: input },
+        ]);
+
+        // Add bot response
         setMessages(prevMessages => [
           ...prevMessages,
-          {text: 'Ini balasan dari chatbot.', sender: 'bot'},
+          { text: botResponse, sender: 'bot' as const },
         ]);
-        setCanSend(true); // Re-enable sending after bot responds
-      }, 5000); // Simulate 3 seconds delay for bot response
+      } catch (error) {
+        setMessages(prevMessages => [
+          ...prevMessages,
+          { text: 'Error: Unable to get a response from AI.', sender: 'bot' as const },
+        ]);
+      } finally {
+        setIsTyping(false); // Stop typing animation
+        setCanSend(true); // Re-enable sending
+      }
     }
   };
 
