@@ -31,7 +31,7 @@ const ResultScreen: React.FC = () => {
   }, [navigation]);
 
   // Toast for connection error
-  // useConnectionErrorToast();
+  useConnectionErrorToast();
 
   return (
     <>

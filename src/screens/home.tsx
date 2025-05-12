@@ -41,7 +41,7 @@ const HomeScreen: React.FC = () => {
   }, []);
 
   // Toast for connection error
-  // useConnectionErrorToast();  // use hook for call toast
+  useConnectionErrorToast();  // use hook for call toast
 
   return (
     <View style={styles.container}>

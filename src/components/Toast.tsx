@@ -1,14 +1,21 @@
 import { useEffect, useState, useRef } from 'react';
 import Toast from 'react-native-toast-message';
-import RNFS from 'react-native-fs'; // React Native File Systemscreenshots
+import RNFS from 'react-native-fs'; // React Native File System
+import NetInfo from '@react-native-community/netinfo'; // Import NetInfo for network monitoring
 
 export const useConnectionErrorToast = () => {
   useEffect(() => {
-    Toast.show({
-      type: 'error',
-      text1: 'Koneksi Internet Tidak Stabil',
-      text2: 'Periksa koneksi Anda dan coba lagi.',
+    const unsubscribe = NetInfo.addEventListener(state => {
+      if (!state.isConnected || !state.isInternetReachable) {
+        Toast.show({
+          type: 'error',
+          text1: 'Koneksi Internet Tidak Stabil',
+          text2: 'Periksa koneksi Anda dan coba lagi.',
+        });
+      }
     });
+
+    return () => unsubscribe(); // Cleanup the listener on unmount
   }, []);
 };
 

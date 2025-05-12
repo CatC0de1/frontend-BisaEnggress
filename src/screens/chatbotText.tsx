@@ -29,7 +29,7 @@ const ChatbotTextScreen: React.FC = () => {
   }, [isTyping]);
 
   // Toast for connection error
-  // useConnectionErrorToast();
+  useConnectionErrorToast();
 
   const sendMessage = async () => {
     if (input.trim() && canSend) {

@@ -32,7 +32,7 @@ const ChatbotSpeechScreen: React.FC = () => {
   }, [icons3.length]);
 
   // Toast for connection error
-  // useConnectionErrorToast();
+  useConnectionErrorToast();
 
   const startBlinking = () => {
     Animated.loop(
