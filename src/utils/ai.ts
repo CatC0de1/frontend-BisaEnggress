@@ -8,7 +8,7 @@ if (!AI_API_KEYS) {
   console.warn('Warning: AI_API_KEYS is not defined. Please check your .env file.');
 }
 
-export const sendMessageToAi = async (messages: { role: 'user' | 'assistant'; content: string }[]) => {
+export const sendMessageToAi = async (messages: { role: 'user' | 'system'; content: string }[]) => {
   try {
     const response = await axios.post(
       AI_API_URL,
@@ -27,7 +27,7 @@ export const sendMessageToAi = async (messages: { role: 'user' | 'assistant'; co
     );
 
     return response.data.choices[0].message.content; // Return the response content
-  } catch (error:any) {
+  } catch (error: any) {
     console.error('Error communicating with AI:', error.response?.data || error.message);
     throw new Error('Failed to communicate with AI.');
   }

@@ -3,16 +3,17 @@ import {View, Text, TextInput, ScrollView, TouchableOpacity} from 'react-native'
 import styles from '../styles/chatbotText.style';
 import { useConnectionErrorToast } from '../components/Toast'; // Import the hook
 import HeaderAndModal from '../components/HeaderAndModal';
-import { sendMessageToAi } from '../utils/ai'; // Import the API utility
+import { sendMessageToAi } from '../utils/ai'; // Import the system prompt
+import systemPromptData from '../prompts/chat_user.json';
 
 const ChatbotTextScreen: React.FC = () => {
-
   const [messages, setMessages] = useState<{text: string; sender: 'user' | 'bot'}[]>([]);
   const [input, setInput] = useState<string>('');
   const [canSend, setCanSend] = useState<boolean>(true); // State to control message alternation
   const [isTyping, setIsTyping] = useState<boolean>(false); // State for typing animation
   const [typingDots, setTypingDots] = useState<string>(''); // State for typing dots animation
   const scrollViewRef = useRef<ScrollView>(null); // Reference to the ScrollView
+  const systemPrompt = systemPromptData.prompt;
 
   useEffect(() => {
     if (isTyping) {
@@ -41,8 +42,9 @@ const ChatbotTextScreen: React.FC = () => {
       setIsTyping(true); // Start typing animation
 
       try {
-        // Send user message to ChatGPT
+        // Send system prompt and user message to ChatGPT
         const botResponse = await sendMessageToAi([
+          { role: 'system', content: systemPrompt },
           { role: 'user', content: input },
         ]);
 
