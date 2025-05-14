@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, BackHandler } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import Icon from 'react-native-vector-icons/AntDesign';
 import { RootStackParamList } from '../types/screens';
 import styles from '../styles/home.style';
 import { useConnectionErrorToast } from '../components/Toast'; // Import the toast function and hook
@@ -11,16 +12,16 @@ const HomeScreen: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [exitModalVisible, setExitModalVisible] = useState(false);
   const [chatbotType, setChatbotType] = useState<'text' | 'speech'>('text');
-  const [topicStarter, setTopicStarter] = useState<'kamu' | 'chatbot'>('kamu');
+  const [role, setRole] = useState<'man' | 'woman'>('man');
 
   // Use the typed navigation prop
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const navigateToChatbot = () => {
     if (chatbotType === 'text') {
-      navigation.navigate('ChatbotText', { topicStarter });
+      navigation.navigate('ChatbotText', { role });
     } else {
-      navigation.navigate('ChatbotSpeech', { topicStarter });
+      navigation.navigate('ChatbotSpeech', { role });
     }
     setModalVisible(false);
   };
@@ -69,13 +70,17 @@ const HomeScreen: React.FC = () => {
               </TouchableOpacity>
             </View>
 
-            <Text style={styles.modalTitle}>Pilih Pembuka Topik</Text>
+            <Text style={styles.modalTitle}>Pilih Role Chatbot</Text>
             <View style={styles.optionGroup}>
-              <TouchableOpacity onPress={() => setTopicStarter('kamu')}>
-                <Text style={[styles.option, topicStarter === 'kamu' && styles.selectedOption]}>Anda</Text>
+              <TouchableOpacity onPress={() => setRole('man')}>
+                <Text style={[styles.option, role === 'man' && styles.selectedOption]}>
+                  <Icon name="man" size={25} color={role === 'man' ? '#3b82f6' : '#000'} />
+                </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setTopicStarter('chatbot')}>
-                <Text style={[styles.option, topicStarter === 'chatbot' && styles.selectedOption]}>Chatbot</Text>
+              <TouchableOpacity onPress={() => setRole('woman')}>
+                <Text style={[styles.option, role === 'woman' && styles.selectedOption]}>
+                  <Icon name="woman" size={25} color={role === 'woman' ? '#3b82f6' : '#000'} />
+                </Text>
               </TouchableOpacity>
             </View>
 

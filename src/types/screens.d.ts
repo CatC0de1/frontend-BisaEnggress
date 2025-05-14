@@ -1,7 +1,7 @@
 export type RootStackParamList = {
   Splash: undefined;
   Home: undefined;
-  ChatbotText: { topicStarter: 'kamu' | 'chatbot' };
-  ChatbotSpeech: { topicStarter: 'kamu' | 'chatbot' };
+  ChatbotText: { role: 'man' | 'woman' };
+  ChatbotSpeech: { role: 'man' | 'woman' };
   Result: { evaluationResult: string };
 };

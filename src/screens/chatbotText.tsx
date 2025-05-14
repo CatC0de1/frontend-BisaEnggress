@@ -4,8 +4,8 @@ import styles from '../styles/chatbotText.style';
 import { useConnectionErrorToast } from '../components/Toast'; // Import the hook
 import HeaderAndModal from '../components/HeaderAndModal';
 import { sendMessageToAi } from '../utils/ai'; // Import the system prompt
-import systemPromptUser from '../prompts/chat_user.json';
-import systemPromptAi from '../prompts/chat_ai.json';
+import systemPromptMan from '../prompts/chat_man.json';
+import systemPromptWoman from '../prompts/chat_woman.json';
 import { useRoute } from '@react-navigation/native'; // Import useRoute for accessing route params
 
 const ChatbotTextScreen: React.FC = () => {
@@ -16,8 +16,8 @@ const ChatbotTextScreen: React.FC = () => {
   const [typingDots, setTypingDots] = useState<string>(''); // State for typing dots animation
   const scrollViewRef = useRef<ScrollView>(null); // Reference to the ScrollView
   const route = useRoute(); // Access route params
-  const { topicStarter } = route.params as { topicStarter: 'kamu' | 'chatbot' }; // Extract topicStarter
-  const systemPrompt = topicStarter === 'chatbot' ? systemPromptAi.prompt : systemPromptUser.prompt;
+  const { role } = route.params as { role: 'man' | 'woman' }; // Extract role
+  const systemPrompt = role === 'woman' ? systemPromptWoman.prompt : systemPromptMan.prompt;
 
   useEffect(() => {
     if (isTyping) {
@@ -33,25 +33,7 @@ const ChatbotTextScreen: React.FC = () => {
     }
   }, [isTyping]);
 
-  useEffect(() => {
-    if (topicStarter === 'chatbot') {
-      // If chatbot is the topic starter, send the initial message
-      const initiateChat = async () => {
-        setIsTyping(true); // Start typing animation
-        try {
-          const botResponse = await sendMessageToAi([
-            { role: 'system', content: systemPrompt },
-          ]);
-          setMessages([{ text: botResponse, sender: 'bot' }]); // Add bot's initial message
-        } catch (error) {
-          setMessages([{ text: 'Error: Unable to start the conversation.', sender: 'bot' }]);
-        } finally {
-          setIsTyping(false); // Stop typing animation
-        }
-      };
-      initiateChat();
-    }
-  }, [topicStarter, systemPrompt]);
+  useEffect(() => {  }, [role, systemPrompt]);
 
   // Toast for connection error
   useConnectionErrorToast();
