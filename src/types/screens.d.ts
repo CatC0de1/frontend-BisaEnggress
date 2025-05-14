@@ -3,5 +3,5 @@ export type RootStackParamList = {
   Home: undefined;
   ChatbotText: { topicStarter: 'kamu' | 'chatbot' };
   ChatbotSpeech: { topicStarter: 'kamu' | 'chatbot' };
-  Result: undefined;
+  Result: { evaluationResult: string };
 };

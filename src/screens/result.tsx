@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, BackHandler } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native'; // Import useRoute
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/screens';
 import ConfettiCannon from 'react-native-confetti-cannon';
@@ -10,6 +10,8 @@ import Toast, { useScreenshot, useConnectionErrorToast } from '../components/Toa
 import styles from '../styles/result.style';
 
 const ResultScreen: React.FC = () => {
+  const route = useRoute(); // Access route params
+  const { evaluationResult } = route.params as { evaluationResult: string }; // Extract evaluation result
   const { takeScreenshot, viewShotRef, hideButtons } = useScreenshot(); // Use the hook
   const [showConfetti, setShowConfetti] = useState(true);
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -48,19 +50,8 @@ const ResultScreen: React.FC = () => {
           <View style={styles.content}>
             <Text style={styles.title}>Hasil</Text>
             <View>
-
-              {/* sample prompt result */}
               <Text style={styles.contentText}>
-                Bahasa Inggris Anda cukup mudah dipahami walau terkadang terdapat kesalahan grammar.
-              </Text>
-              <Text style={styles.nilaiContent}>
-                Grammar    : <Text style={styles.nilai}>75% (cukup bagus)</Text>
-              </Text>
-              <Text style={styles.nilaiContent}>
-                Vocabulary : <Text style={styles.nilai}>85% (bagus)</Text>
-              </Text>
-              <Text style={styles.contentText}>
-                Sepertinya Anda <Text style={styles.titleDrop}>Bisa Enggress</Text>!
+                {evaluationResult || 'Tidak ada hasil penilaian.'} {/* Display evaluation result */}
               </Text>
             </View>
 

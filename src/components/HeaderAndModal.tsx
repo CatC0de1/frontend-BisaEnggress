@@ -3,6 +3,8 @@ import { View, Text, Pressable, Modal, TouchableOpacity, StyleSheet, BackHandler
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/screens';
+import { sendMessageToAi } from '../utils/ai'; // Import the AI utility
+import evaluatePrompt from '../prompts/evaluate.json';
 
 const HeaderAndModal: React.FC = () => {
 
@@ -17,6 +19,22 @@ const HeaderAndModal: React.FC = () => {
 
     return () => backHandler.remove(); // Cleanup on unmount
   }, []);
+
+  const handleEvaluateAndNavigate = async () => {
+    try {
+      const evaluationCode = evaluatePrompt.evaluate; // Use the evaluation prompt from JSON
+      const botResponse = await sendMessageToAi([
+        { role: 'system', content: 'Evaluate the user\'s English skills.' },
+        { role: 'user', content: evaluationCode },
+      ]);
+      setModalVisible(null);
+      navigation.navigate('Result', { evaluationResult: botResponse }); // Pass evaluation result to Result screen
+    } catch (error) {
+      console.error('Error during evaluation:', error);
+      setModalVisible(null);
+      navigation.navigate('Result', { evaluationResult: 'Error: Unable to evaluate.' });
+    }
+  };
 
   return (
     <>
@@ -92,10 +110,7 @@ const HeaderAndModal: React.FC = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.modalButton2}
-                onPress={() => {
-                  setModalVisible(null);
-                  navigation.navigate('Result');
-                }}>
+                onPress={handleEvaluateAndNavigate}>
                 <Text style={styles.modalButtonText}>Ya</Text>
               </TouchableOpacity>
             </View>
