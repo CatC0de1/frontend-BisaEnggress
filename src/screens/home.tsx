@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { RootStackParamList } from '../types/screens';
-import styles from '../styles/home.style';
+import styles from '../styles/home.style'; // import styles
 import { useConnectionErrorToast } from '../components/Toast'; // Import the toast function and hook
 import Header from '../components/Header'; // Import the reusable Header component
 

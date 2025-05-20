@@ -22,6 +22,20 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
 
+  hintContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: 550,
+  },
+
+  hintText: {
+    color: '#3b82f6',
+    fontSize: 16,
+    textAlign: 'center',
+    opacity: 0.7,
+  },
+
   chatMessage: {
     alignSelf: 'flex-end',
     maxWidth: '65%',

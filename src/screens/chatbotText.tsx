@@ -80,6 +80,11 @@ const ChatbotTextScreen: React.FC = () => {
         style={styles.chatbox}
         ref={scrollViewRef}
         onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({animated: true})}>
+        {messages.length === 0 && (
+          <View style={styles.hintContainer}>
+            <Text style={styles.hintText}>Tulis Pesan untuk memulai...</Text>
+          </View>
+        )}
         {messages.map((message, index) => (
           <Text
             key={index}
