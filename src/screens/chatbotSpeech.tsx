@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TouchableOpacity, Animated, Easing } from 'react-native';
+import { View, Text, TouchableOpacity, Animated, Easing, Platform } from 'react-native';
+import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome icons
 import Icon2 from 'react-native-vector-icons/Feather';
 import Icon3 from 'react-native-vector-icons/Entypo';
@@ -30,6 +31,27 @@ const ChatbotSpeechScreen: React.FC = () => {
     }, 750); // Change Icon3 every 750ms
     return () => clearInterval(interval);
   }, [icons3.length]);
+
+  useEffect(() => {
+    // Minta izin mikrofon saat komponen mount
+    const requestMicPermission = async () => {
+      try {
+        const result = await request(
+          Platform.OS === 'android'
+            ? PERMISSIONS.ANDROID.RECORD_AUDIO
+            : PERMISSIONS.IOS.MICROPHONE
+        );
+        if (result !== RESULTS.GRANTED) {
+          // Handle jika izin tidak diberikan
+          console.warn('Izin mikrofon tidak diberikan');
+        }
+      } catch (error) {
+        console.warn('Gagal meminta izin mikrofon:', error);
+      }
+    };
+
+    requestMicPermission();
+  }, []);
 
   // Toast for connection error
   useConnectionErrorToast();
